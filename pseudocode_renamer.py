@@ -81,18 +81,6 @@ class RenamingHook(idaapi.Hexrays_Hooks):
 		tw = idaapi.get_current_viewer()
 		w = idaapi.PluginForm.FormToPyQtWidget(tw)
 		while w is not None:
-			for c in w.children():
-				if hasattr(c, "windowTitle"):
-					child_name = c.windowTitle()
-					orig_name = self.get_original_name(child_name)
-					if orig_name is not None:
-						# c.setWindowTitle(orig_name)
-						pass
-			w = w.parent()
-
-		tw = idaapi.get_current_viewer()
-		w = idaapi.PluginForm.FormToPyQtWidget(tw)
-		while w is not None:
 			if isinstance(w, PyQt5.QtWidgets.QStackedWidget):
 				break
 			w = w.parent()
