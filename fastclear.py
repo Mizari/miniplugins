@@ -27,6 +27,9 @@ idaapi.register_action(action_desc)
 class FastclearPlugin(idaapi.plugin_t):
 	flags = 0
 	wanted_name = "fastclear"
+	comment = ""
+	help = ""
+	wanted_hotkey = ""
 
 	def init(self):
 		return idaapi.PLUGIN_SKIP

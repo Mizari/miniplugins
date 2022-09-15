@@ -117,6 +117,9 @@ class MyIDBHook(idaapi.IDB_Hooks):
 class PseudocodeRenamer(idaapi.plugin_t):
 	flags = 0
 	wanted_name = "pseudocode renamer"
+	comment = ""
+	help = ""
+	wanted_hotkey = ""
 
 	def init(self):
 		if idaapi.init_hexrays_plugin():
