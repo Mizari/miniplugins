@@ -3,6 +3,8 @@ import PyQt5
 
 def get_current_widget():
 	tw = idaapi.get_current_viewer()
+	if tw is None: # in batch mode
+		return None
 	w = idaapi.PluginForm.FormToPyQtWidget(tw)
 	parent = w.parent()
 	if parent is None:
@@ -79,6 +81,9 @@ class RenamingHook(idaapi.Hexrays_Hooks):
 
 	def drop_names(self):
 		tw = idaapi.get_current_viewer()
+		if tw is None: # in batch mode
+			return
+
 		w = idaapi.PluginForm.FormToPyQtWidget(tw)
 		while w is not None:
 			if isinstance(w, PyQt5.QtWidgets.QStackedWidget):
