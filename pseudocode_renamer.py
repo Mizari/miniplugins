@@ -127,11 +127,17 @@ class PseudocodeRenamer(idaapi.plugin_t):
 	wanted_hotkey = ""
 
 	def init(self):
-		if idaapi.init_hexrays_plugin():
-			self.renamer_hook = RenamingHook()
-			self.renamer_hook.hook()
-			self.idb_hook = MyIDBHook(self.renamer_hook)
-			self.idb_hook.hook()
+		if not idaapi.init_hexrays_plugin():
+			return idaapi.PLUGIN_SKIP
+
+		tw = idaapi.get_current_viewer()
+		if tw is None: # in batch mode
+			return idaapi.PLUGIN_SKIP
+
+		self.renamer_hook = RenamingHook()
+		self.renamer_hook.hook()
+		self.idb_hook = MyIDBHook(self.renamer_hook)
+		self.idb_hook.hook()
 
 		return idaapi.PLUGIN_KEEP
 
